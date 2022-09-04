@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+
+x-db-settings:
+  - &db-password ${POSTGRES_PASSWORD:-password}
+  - &db-user ${POSTGRES_USER:-keycloak}
+  - &db-db ${POSTGRES_DB:-keycloak}
+
+x-service-base: &service-base
+  init: true
+  networks:
+    - ssoInstruction_network
+
+  postgres:
+      <<: *service-base
+      image: postgres:14.2-alpine
+      container_name: postgres
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_USER: *db-user
+        POSTGRES_PASSWORD: *db-password
+        POSTGRES_DB: *db-db
+      restart: unless-stopped
+
+  keycloak:
+      <<: *service-base
+      image: quay.io/keycloak/keycloak:legacy
+      container_name: keycloak
+      restart: always
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_SCHEMA: public
+        DB_PASSWORD: password
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: Pa55w0rd
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+        #JDBC_PARAMS: "ssl=true"
+      ports:
+        - 8080:8080
+      depends_on:
+        - postgres
+
+volumes:
+  postgres_data:
+      driver: local
+
+networks:
+  ssoInstruction_network:
+    driver: bridge      
