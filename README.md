@@ -34,5 +34,5 @@ Ein ausführliches Beispiel zu dieser Bibliothek ist hier zu finden: https://git
 6. Unter dem Reiter Users auf den Button `Add user` klicken.
 7. Einen Usernamen eingeben und den Button `Save` klicken.
 8. Mit dem Terminal in den Ordner backend navigieren und die Befehle `npm i` und `npm run start` ausführen.
-9. Mit dem Terminal in den Ordner frontend navigieren und den Befehl `npm i` und `npm run start` ausführen. Bei der Frage ob der Port auf einem anderen Port freigesetzt werden soll mit Ja bestätigen.
+9. Mit dem Terminal in den Ordner frontend navigieren und den Befehl `npm i` und `npm run start` ausführen.
 10. Auf http://localhost:4200 navigieren und sich mit dem erstellten User und dem Passwort anmelden.
