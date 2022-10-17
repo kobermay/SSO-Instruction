@@ -33,6 +33,7 @@ Ein ausführliches Beispiel zu dieser Bibliothek ist hier zu finden: https://git
 5. Mit dem Nutzer "admin" und dem Passwort "Pa55w0rd" anmelden.
 6. Unter dem Reiter Users auf den Button `Add user` klicken.
 7. Einen Usernamen eingeben und den Button `Save` klicken.
-8. Mit dem Terminal in den Ordner backend navigieren und die Befehle `npm i` und `npm run start` ausführen.
-9. Mit dem Terminal in den Ordner frontend navigieren und den Befehl `npm i` und `npm run start` ausführen.
-10. Auf http://localhost:4200 navigieren und sich mit dem erstellten User und dem Passwort anmelden.
+8. Auf den Reiter `Credentials` klicken und ein Passwort eingeben. Den Button Temporary auf OFF setzen und als nächstes den Button `Set Password` drücken.
+9. Mit dem Terminal in den Ordner backend navigieren und die Befehle `npm i` und `npm run start` ausführen.
+10. Mit dem Terminal in den Ordner frontend navigieren und den Befehl `npm i` und `npm run start` ausführen.
+11. Auf http://localhost:4200 navigieren und sich mit dem erstellten User und dem Passwort anmelden.
