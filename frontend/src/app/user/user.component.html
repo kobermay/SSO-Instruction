@@ -1,0 +1,7 @@
+<p *ngIf="givenName">Hey {{givenName}}</p>
+<button *ngIf="show" (click)="hideLoggedInMessage()">hide</button>
+<button *ngIf="!show" (click)="showProtectedResource()">show</button>
+<p *ngIf="show">{{loggedInMessage}}</p>
+<p *ngIf="accessToken">Access Token: {{accessToken}}</p>
+<p *ngIf="idToken">ID Token: {{idToken}}</p>
+<button (click)="logout()">logout</button>

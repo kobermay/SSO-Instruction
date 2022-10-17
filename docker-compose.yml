@@ -2,34 +2,27 @@ version: '3.7'
 
 services:
 
-x-db-settings:
-  - &db-password ${POSTGRES_PASSWORD:-password}
-  - &db-user ${POSTGRES_USER:-keycloak}
-  - &db-db ${POSTGRES_DB:-keycloak}
-
-x-service-base: &service-base
-  init: true
-  networks:
-    - ssoInstruction_network
-
   postgres:
-      <<: *service-base
       image: postgres:14.2-alpine
       container_name: postgres
       volumes:
         - postgres_data:/var/lib/postgresql/data
       environment:
-        POSTGRES_USER: *db-user
-        POSTGRES_PASSWORD: *db-password
-        POSTGRES_DB: *db-db
+        POSTGRES_USER: keycloak
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: keycloak
       restart: unless-stopped
+      networks:
+        - ssoInstruction_network
 
   keycloak:
-      <<: *service-base
       image: quay.io/keycloak/keycloak:legacy
       container_name: keycloak
       restart: always
+      volumes:
+        - ./keycloak:/opt/jboss/keycloak/imports      
       environment:
+        KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-export.json -Dkeycloak.profile.feature.upload_scripts=enabled 
         DB_VENDOR: POSTGRES
         DB_ADDR: postgres
         DB_DATABASE: keycloak
@@ -44,6 +37,8 @@ x-service-base: &service-base
         - 8080:8080
       depends_on:
         - postgres
+      networks:
+        - ssoInstruction_network
 
 volumes:
   postgres_data:
